@@ -8,8 +8,8 @@ set ai
 set t_Co=256
 
 syntax on
-colorscheme zenburn
-let g:zenburn_high_Contrast = 1
+colorscheme jellybeans 
+"let g:zenburn_high_Contrast = 1
 
 set number
 set hidden
@@ -41,12 +41,24 @@ nmap <leader>l :set list!<CR>
 
 if has('gui_running')
 		" Set gvim font
-		set gfn=Consolas:h10
+		if has("mac")
+			set gfn=Consolas:h12
+		else
+			set gfn=Consolas:h10
+		end
+
+		" Set cygwin as shell on Widows
+		if has("win32")
+			set shell=C:/cygwin/bin/bash
+			set shellcmdflag=--login\ -c
+			set shellxquote=\"
+		end
 
 		" Remove gui toolbars
 		set go-=m
 		set go-=T
 		set go-=r
+		set go-=L
 
 		" Set encoding for all files
 		set encoding=utf-8 
@@ -60,8 +72,25 @@ if has('gui_running')
 		map <C-t> <ESC>:tabnew<CR>
 		map <C-Tab> <ESC>:tabn<CR>
 		map <C-S-Tab> <ESC>:tabp<CR>
-		map <C-w> <ESC>:close<CR>
 end
+
+silent! nmap <unique> <silent> <Leader>r :CommandT<CR>
+
+
+function! HtmlEscape()
+  silent s/&/\&amp;/eg
+  silent s/</\&lt;/eg
+  silent s/>/\&gt;/eg
+endfunction
+
+function! HtmlUnEscape()
+  silent s/&lt;/</eg
+  silent s/&gt;/>/eg
+  silent s/&amp;/\&/eg
+endfunction
+
+map <silent> <c-h> :call HtmlEscape()<CR>
+map <silent> <c-u> :call HtmlUnEscape()<CR>
 
 " Easily modify vimrc
 nmap <leader>v :e $MYVIMRC<CR>
