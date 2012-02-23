@@ -76,6 +76,9 @@ end
 
 silent! nmap <unique> <silent> <Leader>r :CommandT<CR>
 
+" Set backup and .swp directory
+set backupdir=~/.vim/backup,.,/tmp
+set directory=~/.vim/backup,.,/tmp
 
 function! HtmlEscape()
   silent s/&/\&amp;/eg
