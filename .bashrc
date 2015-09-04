@@ -1,4 +1,7 @@
-export PS1="[\t] \W\$ "
+source ~/Dropbox/config/git-completion.bash
+source ~/Dropbox/config/git-prompt.sh
+
+export PS1="[\t] \W/\$(__git_ps1 ' (%s)')\$ "
 bind '"\e[5~":history-search-backward'
 bind '"\e[6~":history-search-forward'
 set show-all-if-ambiguous on
@@ -68,11 +71,16 @@ alias rsy='sudo /Library/LoginWindow/LoginHook.sh'
 # Short path to mvim
 alias m='mvim'
 
-##
-# Your previous /Users/peterwooley/.bash_profile file was backed up as /Users/peterwooley/.bash_profile.macports-saved_2011-10-01_at_15:06:57
-##
+# Jump to the projects dir
+alias cdp='cd ~/Dropbox/projects'
 
-# MacPorts Installer addition on 2011-10-01_at_15:06:57: adding an appropriate PATH variable for use with MacPorts.
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
-# Finished adapting your PATH environment variable for use with MacPorts.
+# coffee is just so long to type
+alias c='coffee'
+
+nf() {
+  nodefront compile -w -r 1>> nf.log 2>> nf.log &
+  nodefront serve -l ${1-8000} localhost 1>> nf.log 2>> nf.log &
+}
+
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 

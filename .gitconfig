@@ -1,0 +1,36 @@
+# ~/.gitconfig from @boblet
+# initially based on http://rails.wincent.com/wiki/Git_quickstart
+
+[color]
+	ui = auto
+	interactive = auto
+[repack]
+	usedeltabaseoffset = true # >git 1.5
+[alias]
+	s = status
+	a = !git add . && git status
+	au = !git add -u . && git status
+	aa = !git add . && git add -u . && git status
+	c = commit
+	cm = commit -m
+	ca = commit --amend # careful
+	ac = !git add . && git commit
+	acm = !git add . && git commit -m
+	l = log --graph --all --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset'
+	ll = log --stat --abbrev-commit
+	d = diff --color-words
+	dh = diff --color-words head
+	master = checkout master
+	spull = svn rebase
+	spush = svn dcommit
+	alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/' | sort
+[user]
+	name = Peter Wooley
+	email = peterwooley@gmail.com
+[github]
+	user = peterwooley
+	token = 
+
+[core
+	autocrlf = false
+	whitespace = cr-at-eol
