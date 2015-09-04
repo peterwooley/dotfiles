@@ -18,7 +18,7 @@ ZSH_THEME="philips"
 # CASE_SENSITIVE="true"
 
 # Comment this out to disable bi-weekly auto-update checks
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment to change how many often would you like to wait before auto-updates occur? (in days)
 # export UPDATE_ZSH_DAYS=13
@@ -59,21 +59,6 @@ mkcd () {
     cd "$*"
 }
 
-# Open man pages pretty-like
-pman() {
-	man -t "$@" | open -f -a Preview;
-}
-
-# Open first Google result for man page
-iman() {
-	eval last=\${$#}
-
-	man -w $last > /dev/null
-	if [ $? = 0 ]; then
-		open "http://www.google.com/search?q=man+$last&btnI"
-	fi
-}
-
 alias la='ls -la'
 
 # Git commands are long!
@@ -100,28 +85,11 @@ alias sl='svn log | less'
 # Jump to the projects dir
 alias cdp='cd ~/Dropbox/projects'
 
-# coffee is just so long to type
-alias c='coffee'
-
 # node too
 alias n='node'
 
-nf() {
-  nodefront compile -w -r 1>> nf.log 2>> nf.log &
-  nodefront serve -l ${1-8000} localhost 1>> nf.log 2>> nf.log &
-}
-
-# Handy Tmux aliases
-alias tn="tmux -2 new -s "
-alias ta="tmux -2 attach -t "
-
-# Google Chrome
-alias google-chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
-
 alias marked="/Applications/Marked.app/Contents/MacOS/Marked"
 
-# Time Tracker
-alias tracker="~/AeroFS/McAfee/tracker/tracker.sh"
 
 # McAfee Doop Note
 note() {
@@ -138,12 +106,6 @@ note() {
 bindkey "^[[1~" beginning-of-line
 bindkey "^[[4~" end-of-line
 
-# Get first build where revision appeared
-function firstbuild() {
-  svn log -r $@  https://beasource2.corp.nai.org/svn/projects/mfs/trunk -q --incremental | awk '{print $5;}' | sed '/^$/d' | read builddate
-  curl http://nai-corp\\pwooley:qR8vE88X@ecm.corp.nai.org/ecmquery.aspx\?q\=getbuildsummary\&StartDate\=$builddate\&ProjectID\=175\&VersionID\=1482\&BuildsCount\=500\&PSLT\=600\&PS\=20\&SortField\=DateCreated\&SortDirection\=ASC\&rnd\=1399399046319 --silent | grep BuildNumber --max 1 | awk 'BEGIN { FS = ":"} ; {print $5}' | tr -dc '[0-9]' | read buildnumber
-  echo "Build $buildnumber"
-}
 
 # Use Ctrl-Z to switch back to Vim
 fancy-ctrl-z () {
