@@ -51,7 +51,6 @@ bindkey '^S' history-incremental-search-forward
 bindkey '^P' history-search-backward
 bindkey '^N' history-search-forward  
 
-#setopt AUTO_CD
 unsetopt AUTO_CD
 
 # mkdir, cd into it
