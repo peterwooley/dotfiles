@@ -51,7 +51,8 @@ bindkey '^S' history-incremental-search-forward
 bindkey '^P' history-search-backward
 bindkey '^N' history-search-forward  
 
-setopt AUTO_CD
+#setopt AUTO_CD
+unsetopt AUTO_CD
 
 # mkdir, cd into it
 mkcd () {
@@ -123,6 +124,9 @@ bindkey '^Z' fancy-ctrl-z
 function f() {
   find . -name $@
 }
+
+eval "$(thefuck --alias)"
+alias darn="fuck"
 
 if [ -f ~/.fzf.zsh ]; then
   source ~/.fzf.zsh
